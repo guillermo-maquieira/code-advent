@@ -187,6 +187,28 @@
   background: var(--hero-scrim);
 }
 
+/* Narrow screens: the hero text stacks over the artwork, so the scrim turns
+   vertical — solid behind the headline, letting the illustration peek at the bottom. */
+@media (max-width: 639px) {
+  :root {
+    --hero-scrim: linear-gradient(
+      180deg,
+      oklch(0.99 0.002 20 / 0.98) 0%,
+      oklch(0.99 0.002 20 / 0.96) 72%,
+      oklch(0.99 0.002 20 / 0.3) 100%
+    );
+  }
+
+  .dark {
+    --hero-scrim: linear-gradient(
+      180deg,
+      oklch(0.18 0.012 20 / 0.98) 0%,
+      oklch(0.18 0.012 20 / 0.96) 72%,
+      oklch(0.18 0.012 20 / 0.3) 100%
+    );
+  }
+}
+
 @utility door-card {
   position: relative;
   border-radius: var(--radius);

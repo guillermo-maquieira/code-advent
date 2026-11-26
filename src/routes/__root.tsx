@@ -81,13 +81,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "UB Code Advent — Universidad de Belgrano" },
+      { title: "Code Advent — Universidad de Belgrano" },
       {
         name: "description",
         content:
           "12 days of Python coding puzzles for students of Universidad de Belgrano.",
       },
-      { property: "og:title", content: "UB Code Advent — Universidad de Belgrano" },
+      { property: "og:title", content: "Code Advent — Universidad de Belgrano" },
       {
         property: "og:description",
         content:
@@ -142,7 +142,7 @@ function RootComponent() {
             <Outlet />
           </main>
           <footer className="border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
-            UB Code Advent · Universidad de Belgrano · Python Coding Calendar (Dec 1–12)
+            Code Advent · Universidad de Belgrano · Python Coding Calendar (Dec 1–12)
           </footer>
         </div>
         <Toaster position="bottom-right" />

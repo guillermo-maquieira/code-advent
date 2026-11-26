@@ -13,12 +13,12 @@ import type { Language } from "@/lib/advent-types";
 export const Route = createFileRoute("/puzzle/$day")({
   head: ({ params }) => ({
     meta: [
-      { title: `Day ${params.day} Puzzle — UB Code Advent` },
+      { title: `Day ${params.day} Puzzle — Code Advent` },
       {
         name: "description",
         content: `Solve Day ${params.day} of the Universidad de Belgrano Python coding advent calendar.`,
       },
-      { property: "og:title", content: `Day ${params.day} — UB Code Advent` },
+      { property: "og:title", content: `Day ${params.day} — Code Advent` },
       {
         property: "og:description",
         content: `Bilingual Python coding challenge for Day ${params.day}.`,

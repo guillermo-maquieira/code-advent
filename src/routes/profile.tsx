@@ -11,13 +11,13 @@ import { useAdvent } from "@/lib/advent-store";
 export const Route = createFileRoute("/profile")({
   head: () => ({
     meta: [
-      { title: "Your Profile — UB Code Advent" },
+      { title: "Your Profile — Code Advent" },
       {
         name: "description",
-        content: "Track your earned stars and completed days in UB Code Advent.",
+        content: "Track your earned stars and completed days in Code Advent.",
       },
-      { property: "og:title", content: "Your Profile — UB Code Advent" },
-      { property: "og:description", content: "Your UB Code Advent star progress." },
+      { property: "og:title", content: "Your Profile — Code Advent" },
+      { property: "og:description", content: "Your Code Advent star progress." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

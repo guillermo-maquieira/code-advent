@@ -19,7 +19,7 @@ export function Navbar() {
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-center gap-2.5 text-foreground">
           <TreePine className="size-6 text-evergreen" aria-hidden="true" />
-          <span className="font-display text-lg font-semibold tracking-tight">UB Code Advent</span>
+          <span className="font-display text-lg font-semibold tracking-tight">Code Advent</span>
         </Link>
 
         <nav aria-label="Main navigation" className="flex flex-wrap items-center gap-1 sm:gap-2">

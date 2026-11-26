@@ -3,16 +3,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — UB Code Advent" },
+      { title: "About — Code Advent" },
       {
         name: "description",
         content:
           "Scoring rules, honor code, and December 1–12 schedule for the Universidad de Belgrano Python coding advent calendar.",
       },
-      { property: "og:title", content: "About — UB Code Advent" },
+      { property: "og:title", content: "About — Code Advent" },
       {
         property: "og:description",
-        content: "Scoring, honor code, and schedule for UB Code Advent.",
+        content: "Scoring, honor code, and schedule for Code Advent.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -24,9 +24,9 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="text-4xl font-bold tracking-tight">About UB Code Advent</h1>
+      <h1 className="text-4xl font-bold tracking-tight">About Code Advent</h1>
       <p className="mt-3 text-base text-muted-foreground">
-        Inspired by Advent of Code, UB Code Advent is a 12-day Python programming challenge
+        Inspired by Advent of Code, Code Advent is a 12-day Python programming challenge
         designed for students of Universidad de Belgrano.
       </p>
 

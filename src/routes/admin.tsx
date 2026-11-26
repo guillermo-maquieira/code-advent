@@ -12,14 +12,14 @@ import { useAdvent } from "@/lib/advent-store";
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Panel — UB Code Advent" },
+      { title: "Admin Panel — Code Advent" },
       {
         name: "description",
         content:
-          "Manage puzzles, unlock dates, leaderboard standings, and participants for UB Code Advent.",
+          "Manage puzzles, unlock dates, leaderboard standings, and participants for Code Advent.",
       },
-      { property: "og:title", content: "Admin Panel — UB Code Advent" },
-      { property: "og:description", content: "Administrator tools for UB Code Advent." },
+      { property: "og:title", content: "Admin Panel — Code Advent" },
+      { property: "og:description", content: "Administrator tools for Code Advent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

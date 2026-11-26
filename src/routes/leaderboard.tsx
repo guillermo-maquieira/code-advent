@@ -8,13 +8,13 @@ import { YEARS_OF_STUDY, type YearOfStudy } from "@/lib/advent-types";
 export const Route = createFileRoute("/leaderboard")({
   head: () => ({
     meta: [
-      { title: "Leaderboard — UB Code Advent" },
+      { title: "Leaderboard — Code Advent" },
       {
         name: "description",
         content:
           "Rankings of Universidad de Belgrano students by stars earned and solving time.",
       },
-      { property: "og:title", content: "Leaderboard — UB Code Advent" },
+      { property: "og:title", content: "Leaderboard — Code Advent" },
       {
         property: "og:description",
         content: "See top Python solvers across every year of study at UB.",

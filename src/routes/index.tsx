@@ -8,13 +8,13 @@ import { useAdvent } from "@/lib/advent-store";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "UB Code Advent — 12 Days of Python at Universidad de Belgrano" },
+      { title: "Code Advent — A Very Python Christmas at Universidad de Belgrano" },
       {
         name: "description",
         content:
           "Unlock 12 Python coding puzzles from December 1 to 12, earn golden stars, and compete on the Universidad de Belgrano leaderboard.",
       },
-      { property: "og:title", content: "UB Code Advent — Universidad de Belgrano" },
+      { property: "og:title", content: "Code Advent — Universidad de Belgrano" },
       {
         property: "og:description",
         content: "12 Python coding challenges for Universidad de Belgrano students, Dec 1–12.",
@@ -35,17 +35,17 @@ function Index() {
       <section className="relative overflow-hidden border-b border-border/60">
         <img
           src={adventHero}
-          alt="Snowy Universidad de Belgrano courtyard under golden starlight constellations"
-          width={1600}
-          height={896}
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          alt="Retro Christmas illustration of a vintage computer wearing a Santa hat beside a decorated tree and wrapped gifts"
+          width={1536}
+          height={1024}
+          className="absolute inset-0 h-full w-full object-cover object-center max-sm:object-right-bottom"
         />
         <div className="hero-scrim relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
           <p className="font-mono text-xs font-medium tracking-widest text-star uppercase">
             Universidad de Belgrano · Dec 1 – Dec 12
           </p>
           <h1 className="mt-3 max-w-2xl text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
-            Twelve Nights of Python
+            A Very Python Christmas
           </h1>
           <p className="mt-4 max-w-xl text-base text-foreground/85 sm:text-lg">
             Download each day&apos;s puzzle input, write your Python solution locally, and submit

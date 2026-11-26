@@ -7,14 +7,14 @@ import { YEARS_OF_STUDY, type YearOfStudy } from "@/lib/advent-types";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign In — UB Code Advent" },
+      { title: "Sign In — Code Advent" },
       {
         name: "description",
         content:
-          "Sign in or create an account with your Universidad de Belgrano email to participate in UB Code Advent.",
+          "Sign in or create an account with your Universidad de Belgrano email to participate in Code Advent.",
       },
-      { property: "og:title", content: "Sign In — UB Code Advent" },
-      { property: "og:description", content: "UB email authentication for UB Code Advent." },
+      { property: "og:title", content: "Sign In — Code Advent" },
+      { property: "og:description", content: "UB email authentication for Code Advent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
