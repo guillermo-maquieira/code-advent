@@ -1,4 +1,4 @@
-# UB Code Advent
+# Code Advent
 
 Build a web app: a Python-based coding advent calendar inspired by Advent of Code, for students of Universidad de Belgrano.
 
