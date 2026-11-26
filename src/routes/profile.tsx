@@ -90,14 +90,9 @@ function ProfilePage() {
                 <p className="text-sm font-medium text-foreground">{puzzle.title.en}</p>
               </div>
               <div className="flex items-center gap-1.5">
-                {[1, 2].map((n) => (
-                  <Star
-                    key={n}
-                    className={
-                      n <= stars ? "size-4 fill-star text-star" : "size-4 text-star-muted"
-                    }
-                  />
-                ))}
+                <span className="whitespace-nowrap font-mono text-xs text-muted-foreground">
+                  {stars} / 2
+                </span>
                 {stars === 2 && (
                   <CheckCircle2 className="ml-1 size-4 text-evergreen" aria-label="Completed" />
                 )}

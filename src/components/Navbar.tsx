@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { LogOut, Shield, Star, User } from "lucide-react";
+import { LogOut, Shield, Star, TreePine, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { getUserTotalStars } from "@/lib/advent-logic";
 import { useAdvent } from "@/lib/advent-store";
 
@@ -14,13 +15,11 @@ export function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-t-4 border-t-primary border-b border-b-border/80 bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-center gap-2.5 text-foreground">
-          <Star className="size-5 fill-star text-star" aria-hidden="true" />
-          <span className="font-display text-lg font-semibold tracking-tight">
-            UB Code Advent
-          </span>
+          <TreePine className="size-6 text-evergreen" aria-hidden="true" />
+          <span className="font-display text-lg font-semibold tracking-tight">UB Code Advent</span>
         </Link>
 
         <nav aria-label="Main navigation" className="flex flex-wrap items-center gap-1 sm:gap-2">
@@ -71,7 +70,9 @@ export function Navbar() {
                   <Star className="size-3 fill-star text-star" aria-hidden="true" />
                 </span>
               </Link>
-              <button
+              <Button
+                variant="outline"
+                size="sm"
                 type="button"
                 onClick={handleLogout}
                 aria-label="Sign out"
@@ -79,15 +80,17 @@ export function Navbar() {
               >
                 <LogOut className="size-4" aria-hidden="true" />
                 <span className="hidden sm:inline">Sign out</span>
-              </button>
+              </Button>
             </>
           ) : (
-            <Link
-              to="/auth"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-3.5 py-1.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              Sign in
-            </Link>
+            <Button asChild size="sm">
+              <Link
+                to="/auth"
+                className="inline-flex items-center justify-center rounded-md bg-primary px-3.5 py-1.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                Sign in
+              </Link>
+            </Button>
           )}
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CheckCircle2, Lock, Star, Unlock } from "lucide-react";
 import adventHero from "@/assets/advent-hero.jpg";
+import { Button } from "@/components/ui/button";
 import { getUserStarsForDay, getUserTotalStars, isPuzzleUnlocked } from "@/lib/advent-logic";
 import { useAdvent } from "@/lib/advent-store";
 
@@ -16,8 +17,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "UB Code Advent — Universidad de Belgrano" },
       {
         property: "og:description",
-        content:
-          "12 Python coding challenges for Universidad de Belgrano students, Dec 1–12.",
+        content: "12 Python coding challenges for Universidad de Belgrano students, Dec 1–12.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -48,32 +48,38 @@ function Index() {
             Twelve Nights of Python
           </h1>
           <p className="mt-4 max-w-xl text-base text-foreground/85 sm:text-lg">
-            Download each day&apos;s puzzle input, write your Python solution locally, and
-            submit both answers to collect all 24 golden stars.
+            Download each day&apos;s puzzle input, write your Python solution locally, and submit
+            both answers to collect all 24 golden stars.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             {currentUser ? (
-              <Link
-                to="/profile"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-              >
-                <Star className="size-4 fill-primary-foreground" aria-hidden="true" />
-                {totalStars} / 24 Stars Earned
-              </Link>
+              <Button asChild>
+                <Link
+                  to="/profile"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                >
+                  <Star className="size-4 fill-primary-foreground" aria-hidden="true" />
+                  {totalStars} / 24 Stars Earned
+                </Link>
+              </Button>
             ) : (
-              <Link
-                to="/auth"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-              >
-                Join with your UB Email
-              </Link>
+              <Button asChild>
+                <Link
+                  to="/auth"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                >
+                  Join with your UB Email
+                </Link>
+              </Button>
             )}
-            <Link
-              to="/leaderboard"
-              className="inline-flex items-center rounded-lg border border-border bg-background/70 px-5 py-2.5 text-sm font-medium text-foreground backdrop-blur-sm transition-colors hover:bg-secondary"
-            >
-              View Leaderboard
-            </Link>
+            <Button asChild variant="outline">
+              <Link
+                to="/leaderboard"
+                className="inline-flex items-center rounded-lg border border-border bg-background/70 px-5 py-2.5 text-sm font-medium text-foreground backdrop-blur-sm transition-colors hover:bg-secondary"
+              >
+                View Leaderboard
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -126,10 +132,7 @@ function Index() {
                     </p>
                   </div>
                   {completed ? (
-                    <CheckCircle2
-                      className="size-5 text-evergreen"
-                      aria-label="Completed"
-                    />
+                    <CheckCircle2 className="size-5 text-evergreen" aria-label="Completed" />
                   ) : unlocked ? (
                     <Unlock className="size-4 text-star" aria-label="Unlocked" />
                   ) : (
@@ -144,25 +147,11 @@ function Index() {
                       : `Unlocks ${puzzle.unlockDate}`}
                   </h3>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    {unlocked || currentUser?.isAdmin
-                      ? puzzle.topic.en
-                      : "Come back on unlock day"}
+                    {unlocked || currentUser?.isAdmin ? puzzle.topic.en : "Come back on unlock day"}
                   </p>
                 </div>
 
                 <div className="mt-5 flex items-center justify-between border-t border-border/60 pt-3">
-                  <div className="flex items-center gap-1" aria-label={`${stars} of 2 stars`}>
-                    {[1, 2].map((n) => (
-                      <Star
-                        key={n}
-                        className={
-                          n <= stars
-                            ? "size-4 fill-star text-star"
-                            : "size-4 text-star-muted"
-                        }
-                      />
-                    ))}
-                  </div>
                   <span className="font-mono text-xs text-muted-foreground">
                     {completed
                       ? "Done"
@@ -178,11 +167,7 @@ function Index() {
 
             if (!canOpen) {
               return (
-                <div
-                  key={puzzle.day}
-                  aria-disabled="true"
-                  className={`door-card ${stateClass}`}
-                >
+                <div key={puzzle.day} aria-disabled="true" className={`door-card ${stateClass}`}>
                   {cardBody}
                 </div>
               );
