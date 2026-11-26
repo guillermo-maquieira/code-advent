@@ -104,10 +104,10 @@ export function AdventProvider({ children }: { children: ReactNode }) {
       if (!emailCheck.valid) return { ok: false, error: emailCheck.error };
       const found = users.find((u) => u.email === emailCheck.normalized);
       if (!found) {
-        return { ok: false, error: "No account found for this UB email. Please sign up first." };
+        return { ok: false, error: "No existe una cuenta con este correo UB. Registrate primero." };
       }
       if (found.password !== password) {
-        return { ok: false, error: "Incorrect password. Please try again." };
+        return { ok: false, error: "Contraseña incorrecta. Intentá de nuevo." };
       }
       setSessionEmail(found.email);
       window.localStorage.setItem(STORAGE_KEYS.sessionEmail, found.email);
@@ -125,15 +125,15 @@ export function AdventProvider({ children }: { children: ReactNode }) {
     }): AuthResult => {
       const cleanName = input.name.trim();
       if (cleanName.length < 2) {
-        return { ok: false, error: "Please enter your full name." };
+        return { ok: false, error: "Ingresá tu nombre completo." };
       }
       const emailCheck = validateUbEmail(input.email);
       if (!emailCheck.valid) return { ok: false, error: emailCheck.error };
       if (input.password.length < 6) {
-        return { ok: false, error: "Password must be at least 6 characters." };
+        return { ok: false, error: "La contraseña debe tener al menos 6 caracteres." };
       }
       if (users.some((u) => u.email === emailCheck.normalized)) {
-        return { ok: false, error: "This UB email is already registered. Please log in." };
+        return { ok: false, error: "Este correo UB ya está registrado. Iniciá sesión." };
       }
       const isAdmin = (SEEDED_ADMIN_EMAILS as readonly string[]).includes(emailCheck.normalized);
       const created: UserAccount = {
@@ -161,17 +161,17 @@ export function AdventProvider({ children }: { children: ReactNode }) {
   const submitAnswer = useCallback(
     (day: number, part: 1 | 2, answer: string, elapsedSeconds: number): SubmitResult => {
       if (!currentUser) {
-        return { ok: false, message: "Sign in with your UB email to submit answers." };
+        return { ok: false, message: "Iniciá sesión con tu correo UB para enviar respuestas." };
       }
       const puzzle = puzzles.find((p) => p.day === day);
-      if (!puzzle) return { ok: false, message: "Puzzle not found." };
+      if (!puzzle) return { ok: false, message: "Desafío no encontrado." };
       const already = currentUser.solves.some((s) => s.day === day && s.part === part);
       if (already) {
-        return { ok: true, alreadySolved: true, message: "You already earned this star!" };
+        return { ok: true, alreadySolved: true, message: "¡Ya ganaste esta estrella!" };
       }
       const expected = part === 1 ? puzzle.answerPart1 : puzzle.answerPart2;
       if (!checkPuzzleAnswer(answer, expected)) {
-        return { ok: false, message: "Not quite right — double-check your Python script and try again." };
+        return { ok: false, message: "No es correcta — revisá tu script de Python e intentá de nuevo." };
       }
       const record = {
         day,
@@ -183,7 +183,7 @@ export function AdventProvider({ children }: { children: ReactNode }) {
         u.id === currentUser.id ? { ...u, solves: [...u.solves, record] } : u,
       );
       persistUsers(updated);
-      return { ok: true, message: `Correct! You earned a gold star for Day ${day} Part ${part}.` };
+      return { ok: true, message: `¡Correcto! Ganaste una estrella dorada por el Día ${day} Parte ${part}.` };
     },
     [currentUser, puzzles, users, persistUsers],
   );

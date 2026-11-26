@@ -15,10 +15,18 @@ export const YEARS_OF_STUDY: readonly YearOfStudy[] = [
   "5th Year",
 ] as const;
 
+export const YEAR_OF_STUDY_LABELS: Record<YearOfStudy, string> = {
+  "1st Year": "1.º año",
+  "2nd Year": "2.º año",
+  "3rd Year": "3.º año",
+  "4th Year": "4.º año",
+  "5th Year": "5.º año",
+};
+
 export const ALLOWED_EMAIL_DOMAINS = ["ub.edu.ar", "comunidad.ub.edu.ar"] as const;
 
 export const DOMAIN_ERROR_MESSAGE =
-  "Only Universidad de Belgrano emails can participate";
+  "Solo pueden participar correos de la Universidad de Belgrano";
 
 export const SEEDED_ADMIN_EMAILS = [
   "guillermo.maquieira@comunidad.ub.edu.ar",

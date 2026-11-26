@@ -22,13 +22,13 @@ export function Navbar() {
           <span className="font-display text-lg font-semibold tracking-tight">Code Advent</span>
         </Link>
 
-        <nav aria-label="Main navigation" className="flex flex-wrap items-center gap-1 sm:gap-2">
+        <nav aria-label="Navegación principal" className="flex flex-wrap items-center gap-1 sm:gap-2">
           <Link
             to="/"
             activeProps={{ className: "bg-secondary text-star" }}
             className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            Calendar
+            Calendario
           </Link>
           <Link
             to="/leaderboard"
@@ -42,7 +42,7 @@ export function Navbar() {
             activeProps={{ className: "bg-secondary text-star" }}
             className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            About
+            Acerca de
           </Link>
           {currentUser?.isAdmin && (
             <Link
@@ -75,11 +75,11 @@ export function Navbar() {
                 size="sm"
                 type="button"
                 onClick={handleLogout}
-                aria-label="Sign out"
+                aria-label="Cerrar sesión"
                 className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               >
                 <LogOut className="size-4" aria-hidden="true" />
-                <span className="hidden sm:inline">Sign out</span>
+                <span className="hidden sm:inline">Cerrar sesión</span>
               </Button>
             </>
           ) : (
@@ -88,7 +88,7 @@ export function Navbar() {
                 to="/auth"
                 className="inline-flex items-center justify-center rounded-md bg-primary px-3.5 py-1.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
               >
-                Sign in
+                Iniciar sesión
               </Link>
             </Button>
           )}
