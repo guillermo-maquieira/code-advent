@@ -121,17 +121,18 @@
   --sidebar-accent-foreground: var(--accent-foreground);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
-  --hero-scrim: linear-gradient(
-    90deg,
-    oklch(0.99 0.002 20 / 0.97) 0%,
-    oklch(0.99 0.002 20 / 0.9) 45%,
-    oklch(0.99 0.002 20 / 0.3) 100%
-  );
   --shadow-star: 0 4px 16px -6px oklch(0.51 0.195 25 / 0.2);
   --door-unlocked-border: oklch(0.51 0.195 25 / 0.5);
   --door-completed-border: oklch(0.43 0.115 155 / 0.5);
   --door-completed-background: oklch(0.965 0.018 155);
   --door-locked-background: var(--card);
+  --snake-board: oklch(0.955 0.01 20);
+  --snake-cell-empty: oklch(0.915 0.012 20);
+  --snake-red: var(--primary);
+  --snake-green: var(--evergreen);
+  --snake-white: oklch(1 0 0);
+  --snake-white-border: oklch(0.75 0.04 25);
+  --snake-eye: oklch(1 0 0);
 }
 
 .dark {
@@ -153,15 +154,16 @@
   --star-muted: oklch(0.52 0.02 20);
   --evergreen: oklch(0.74 0.12 155);
   --evergreen-foreground: oklch(0.18 0.02 155);
-  --hero-scrim: linear-gradient(
-    90deg,
-    oklch(0.18 0.012 20 / 0.97) 0%,
-    oklch(0.18 0.012 20 / 0.9) 45%,
-    oklch(0.18 0.012 20 / 0.3) 100%
-  );
   --door-unlocked-border: oklch(0.65 0.19 25 / 0.6);
   --door-completed-border: oklch(0.74 0.12 155 / 0.5);
   --door-completed-background: oklch(0.245 0.035 155);
+  --snake-board: oklch(0.16 0.012 20);
+  --snake-cell-empty: oklch(0.23 0.016 20);
+  --snake-red: var(--primary);
+  --snake-green: var(--evergreen);
+  --snake-white: oklch(0.96 0.004 20);
+  --snake-white-border: oklch(0.65 0.08 25);
+  --snake-eye: oklch(0.16 0.012 20);
 }
 
 @layer base {
@@ -183,30 +185,50 @@
   }
 }
 
-@utility hero-scrim {
-  background: var(--hero-scrim);
+@utility retro-snake-board {
+  background-color: var(--snake-board);
 }
 
-/* Narrow screens: the hero text stacks over the artwork, so the scrim turns
-   vertical — solid behind the headline, letting the illustration peek at the bottom. */
-@media (max-width: 639px) {
-  :root {
-    --hero-scrim: linear-gradient(
-      180deg,
-      oklch(0.99 0.002 20 / 0.98) 0%,
-      oklch(0.99 0.002 20 / 0.96) 72%,
-      oklch(0.99 0.002 20 / 0.3) 100%
-    );
-  }
+@utility snake-empty {
+  background-color: var(--snake-cell-empty);
+}
 
-  .dark {
-    --hero-scrim: linear-gradient(
-      180deg,
-      oklch(0.18 0.012 20 / 0.98) 0%,
-      oklch(0.18 0.012 20 / 0.96) 72%,
-      oklch(0.18 0.012 20 / 0.3) 100%
-    );
-  }
+@utility snake-head {
+  background-color: var(--snake-green);
+  box-shadow: inset 0 -2px 0 oklch(0.25 0.07 155 / 0.45);
+}
+
+@utility snake-eye {
+  background-color: var(--snake-eye);
+}
+
+@utility snake-red {
+  background-color: var(--snake-red);
+  box-shadow: inset 0 -2px 0 oklch(0.32 0.14 25 / 0.35);
+}
+
+@utility snake-white {
+  background-color: var(--snake-white);
+  box-shadow: inset 0 0 0 1px var(--snake-white-border);
+}
+
+@utility snake-green {
+  background-color: var(--snake-green);
+  box-shadow: inset 0 -2px 0 oklch(0.25 0.07 155 / 0.35);
+}
+
+@utility snake-gift {
+  background:
+    linear-gradient(90deg, transparent 40%, var(--snake-white) 40%, var(--snake-white) 60%, transparent 60%),
+    linear-gradient(0deg, transparent 40%, var(--snake-white) 40%, var(--snake-white) 60%, transparent 60%),
+    var(--snake-red);
+}
+
+@utility snake-tree {
+  background:
+    radial-gradient(circle at 50% 28%, var(--snake-red) 14%, transparent 16%),
+    radial-gradient(circle at 35% 65%, var(--snake-white) 12%, transparent 14%),
+    var(--snake-green);
 }
 
 @utility door-card {

@@ -3,16 +3,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Code Advent" },
+      { title: "Acerca de — Code Advent" },
       {
         name: "description",
         content:
-          "Scoring rules, honor code, and December 1–12 schedule for the Universidad de Belgrano Python coding advent calendar.",
+          "Reglas de puntaje, código de honor y cronograma del 1 al 12 de diciembre para el calendario de programación en Python de la Universidad de Belgrano.",
       },
-      { property: "og:title", content: "About — Code Advent" },
+      { property: "og:title", content: "Acerca de — Code Advent" },
       {
         property: "og:description",
-        content: "Scoring, honor code, and schedule for Code Advent.",
+        content: "Puntaje, código de honor y cronograma de Code Advent.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -24,64 +24,63 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="text-4xl font-bold tracking-tight">About Code Advent</h1>
+      <h1 className="text-4xl font-bold tracking-tight">Acerca de Code Advent</h1>
       <p className="mt-3 text-base text-muted-foreground">
-        Inspired by Advent of Code, Code Advent is a 12-day Python programming challenge
-        designed for students of Universidad de Belgrano.
+        Inspirado en Advent of Code, Code Advent es un desafío de programación en Python de 12 días
+        pensado para estudiantes de la Universidad de Belgrano.
       </p>
 
       <div className="mt-10 space-y-10">
         <section>
-          <h2 className="text-2xl font-semibold text-foreground">Scoring</h2>
+          <h2 className="text-2xl font-semibold text-foreground">Puntaje</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-foreground/90">
             <li>
-              Every puzzle has <strong>two parts</strong> (Part 1 and Part 2). Each correct
-              answer earns <strong>1 gold star</strong>, for up to 24 stars across the 12 days.
+              Cada desafío tiene <strong>dos partes</strong> (Parte 1 y Parte 2). Cada respuesta
+              correcta suma <strong>1 estrella dorada</strong>, hasta un máximo de 24 estrellas en los 12 días.
             </li>
             <li>
-              You write and run your Python script locally on your own computer using the
-              downloadable input file, then paste only your final computed result here.
+              Escribís y ejecutás tu script de Python localmente en tu computadora usando el
+              archivo de entrada descargable, y luego pegás aquí solo el resultado final calculado.
             </li>
             <li>
-              The leaderboard ranks participants primarily by <strong>total stars earned</strong>.
-              Ties are broken by faster cumulative solving time.
+              El Leaderboard ordena a los participantes principalmente por <strong>total de estrellas ganadas</strong>.
+              En caso de empate, define el menor tiempo acumulado de resolución.
             </li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-foreground">Honor Code</h2>
+          <h2 className="text-2xl font-semibold text-foreground">Código de Honor</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-foreground/90">
             <li>
-              Write your own Python code. Discussing general algorithms with classmates is
-              welcome, but sharing direct answers or complete solutions before a door closes is
-              not allowed.
+              Escribí tu propio código en Python. Conversar sobre algoritmos generales con
+              compañeros está buenísimo, pero no está permitido compartir respuestas directas ni
+              soluciones completas mientras el evento está en curso.
             </li>
             <li>
-              Participation is restricted to the Universidad de Belgrano community using an
-              official <span className="font-mono text-star">@ub.edu.ar</span> or{" "}
-              <span className="font-mono text-star">@comunidad.ub.edu.ar</span> address.
+              La participación es exclusiva para la comunidad de la Universidad de Belgrano con
+              correo oficial <span className="font-mono text-star">@ub.edu.ar</span> o{" "}
+              <span className="font-mono text-star">@comunidad.ub.edu.ar</span>.
             </li>
             <li>
-              Keep the spirit friendly and educational — the goal is sharpening Python skills
-              together.
+              Mantené un espíritu amigable y educativo: la idea es practicar y mejorar juntos en Python.
             </li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-foreground">Schedule</h2>
+          <h2 className="text-2xl font-semibold text-foreground">Cronograma</h2>
           <p className="mt-3 text-sm leading-relaxed text-foreground/90">
-            Doors open daily from <strong>December 1 through December 12</strong> at 00:00
-            Argentina Time (UTC-3). Once unlocked, a puzzle remains open for the rest of the
-            event so you can catch up at your own pace.
+            Las puertas se abren todos los días del <strong>1 al 12 de diciembre</strong> a las
+            00:00 hora de Argentina (UTC-3). Una vez desbloqueado, cada desafío permanece abierto
+            el resto del evento para que puedas ponerte al día a tu ritmo.
           </p>
         </section>
       </div>
 
       <div className="mt-10 border-t border-border pt-6">
         <Link to="/" className="text-sm font-medium text-star hover:underline">
-          Return to the Advent Calendar →
+          Volver al Calendario de Adviento →
         </Link>
       </div>
     </div>

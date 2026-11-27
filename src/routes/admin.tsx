@@ -8,18 +8,19 @@ import {
   getUserTotalStars,
 } from "@/lib/advent-logic";
 import { useAdvent } from "@/lib/advent-store";
+import { YEAR_OF_STUDY_LABELS } from "@/lib/advent-types";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Panel — Code Advent" },
+      { title: "Panel de Admin — Code Advent" },
       {
         name: "description",
         content:
-          "Manage puzzles, unlock dates, leaderboard standings, and participants for Code Advent.",
+          "Administrá desafíos, fechas de apertura, el Leaderboard y los participantes de Code Advent.",
       },
-      { property: "og:title", content: "Admin Panel — Code Advent" },
-      { property: "og:description", content: "Administrator tools for Code Advent." },
+      { property: "og:title", content: "Panel de Admin — Code Advent" },
+      { property: "og:description", content: "Herramientas de administración para Code Advent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -28,6 +29,12 @@ export const Route = createFileRoute("/admin")({
 });
 
 type AdminTab = "puzzles" | "leaderboard" | "participants";
+
+const ADMIN_TAB_LABELS: Record<AdminTab, string> = {
+  puzzles: "Desafíos",
+  leaderboard: "Leaderboard",
+  participants: "Participantes",
+};
 
 function AdminPage() {
   const { puzzles, users, currentUser, updatePuzzle, toggleUserAdmin, removeUser } = useAdvent();
@@ -66,12 +73,12 @@ function AdminPage() {
     return (
       <div className="mx-auto max-w-xl px-4 py-20 text-center">
         <ShieldAlert className="mx-auto size-10 text-destructive" aria-hidden="true" />
-        <h1 className="mt-4 text-3xl font-bold">Admin access required</h1>
+        <h1 className="mt-4 text-3xl font-bold">Se requiere acceso de Admin</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Only authorized Universidad de Belgrano administrators can access this panel.
+          Solo los administradores autorizados de la Universidad de Belgrano pueden acceder a este panel.
         </p>
         <Link to="/" className="mt-6 inline-block text-sm font-medium text-star hover:underline">
-          Return to Calendar
+          Volver al Calendario
         </Link>
       </div>
     );
@@ -80,7 +87,7 @@ function AdminPage() {
   function handleSavePuzzle(e: FormEvent) {
     e.preventDefault();
     if (!titleEn.trim() || !answerPart1.trim() || !answerPart2.trim() || !unlockDate) {
-      toast.error("Title, both expected answers, and unlock date are required.");
+      toast.error("El título, ambas respuestas esperadas y la fecha de apertura son obligatorios.");
       return;
     }
     const saved = updatePuzzle(selectedDay, {
@@ -92,16 +99,16 @@ function AdminPage() {
       answerPart2: answerPart2.trim(),
       unlockDate,
     });
-    if (saved) toast.success(`Saved Day ${selectedDay} puzzle.`);
+    if (saved) toast.success(`Se guardó el desafío del Día ${selectedDay}.`);
   }
 
   const leaderboardRows = buildLeaderboard(users, "all");
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="text-4xl font-bold tracking-tight">Admin Panel</h1>
+      <h1 className="text-4xl font-bold tracking-tight">Panel de Admin</h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        Signed in as {currentUser.name} ({currentUser.email})
+        Sesión iniciada como {currentUser.name} ({currentUser.email})
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2 border-b border-border pb-4">
@@ -110,13 +117,13 @@ function AdminPage() {
             key={t}
             type="button"
             onClick={() => setTab(t)}
-            className={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition-colors ${
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
               tab === t
                 ? "bg-primary text-primary-foreground"
                 : "bg-card text-muted-foreground hover:text-foreground"
             }`}
           >
-            {t}
+            {ADMIN_TAB_LABELS[t]}
           </button>
         ))}
       </div>
@@ -145,7 +152,7 @@ function AdminPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="ed-title-en" className="block text-xs font-medium text-muted-foreground">
-                  Title (English)
+                  Título (Inglés)
                 </label>
                 <input
                   id="ed-title-en"
@@ -156,7 +163,7 @@ function AdminPage() {
               </div>
               <div>
                 <label htmlFor="ed-title-es" className="block text-xs font-medium text-muted-foreground">
-                  Title (Spanish)
+                  Título (Español)
                 </label>
                 <input
                   id="ed-title-es"
@@ -170,7 +177,7 @@ function AdminPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               <div>
                 <label htmlFor="ed-unlock" className="block text-xs font-medium text-muted-foreground">
-                  Unlock Date
+                  Fecha de apertura
                 </label>
                 <input
                   id="ed-unlock"
@@ -182,7 +189,7 @@ function AdminPage() {
               </div>
               <div>
                 <label htmlFor="ed-ans1" className="block text-xs font-medium text-muted-foreground">
-                  Expected Answer (Part 1)
+                  Respuesta esperada (Parte 1)
                 </label>
                 <input
                   id="ed-ans1"
@@ -193,7 +200,7 @@ function AdminPage() {
               </div>
               <div>
                 <label htmlFor="ed-ans2" className="block text-xs font-medium text-muted-foreground">
-                  Expected Answer (Part 2)
+                  Respuesta esperada (Parte 2)
                 </label>
                 <input
                   id="ed-ans2"
@@ -207,7 +214,7 @@ function AdminPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="ed-s1-en" className="block text-xs font-medium text-muted-foreground">
-                  Part 1 Story (English)
+                  Consigna Parte 1 (Inglés)
                 </label>
                 <textarea
                   id="ed-s1-en"
@@ -219,7 +226,7 @@ function AdminPage() {
               </div>
               <div>
                 <label htmlFor="ed-s1-es" className="block text-xs font-medium text-muted-foreground">
-                  Part 1 Story (Spanish)
+                  Consigna Parte 1 (Español)
                 </label>
                 <textarea
                   id="ed-s1-es"
@@ -234,7 +241,7 @@ function AdminPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="ed-s2-en" className="block text-xs font-medium text-muted-foreground">
-                  Part 2 Story (English)
+                  Consigna Parte 2 (Inglés)
                 </label>
                 <textarea
                   id="ed-s2-en"
@@ -246,7 +253,7 @@ function AdminPage() {
               </div>
               <div>
                 <label htmlFor="ed-s2-es" className="block text-xs font-medium text-muted-foreground">
-                  Part 2 Story (Spanish)
+                  Consigna Parte 2 (Español)
                 </label>
                 <textarea
                   id="ed-s2-es"
@@ -260,7 +267,7 @@ function AdminPage() {
 
             <div>
               <label htmlFor="ed-input" className="block text-xs font-medium text-muted-foreground">
-                Downloadable Input File ({selectedPuzzle.inputFilename})
+                Archivo de entrada descargable ({selectedPuzzle.inputFilename})
               </label>
               <textarea
                 id="ed-input"
@@ -275,7 +282,7 @@ function AdminPage() {
               type="submit"
               className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Save Day {selectedDay} Changes
+              Guardar cambios del Día {selectedDay}
             </button>
           </form>
         </div>
@@ -287,10 +294,10 @@ function AdminPage() {
             <thead className="border-b border-border bg-surface text-xs uppercase text-muted-foreground">
               <tr>
                 <th className="px-4 py-3">#</th>
-                <th className="px-4 py-3">Name</th>
-                <th className="px-4 py-3">Year</th>
-                <th className="px-4 py-3 text-right">Stars</th>
-                <th className="px-4 py-3 text-right">Time</th>
+                <th className="px-4 py-3">Nombre</th>
+                <th className="px-4 py-3">Año</th>
+                <th className="px-4 py-3 text-right">Estrellas</th>
+                <th className="px-4 py-3 text-right">Tiempo</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
@@ -301,7 +308,9 @@ function AdminPage() {
                     <p className="font-medium">{row.name}</p>
                     <p className="font-mono text-xs text-muted-foreground">{row.email}</p>
                   </td>
-                  <td className="px-4 py-3 text-muted-foreground">{row.yearOfStudy}</td>
+                  <td className="px-4 py-3 text-muted-foreground">
+                    {YEAR_OF_STUDY_LABELS[row.yearOfStudy]}
+                  </td>
                   <td className="px-4 py-3 text-right font-mono text-star">
                     {row.stars} <Star className="inline size-3.5 fill-star" />
                   </td>
@@ -320,11 +329,11 @@ function AdminPage() {
           <table className="w-full text-left text-sm">
             <thead className="border-b border-border bg-surface text-xs uppercase text-muted-foreground">
               <tr>
-                <th className="px-4 py-3">Participant</th>
-                <th className="px-4 py-3">Year</th>
-                <th className="px-4 py-3">Role</th>
-                <th className="px-4 py-3 text-right">Stars</th>
-                <th className="px-4 py-3 text-right">Actions</th>
+                <th className="px-4 py-3">Participante</th>
+                <th className="px-4 py-3">Año</th>
+                <th className="px-4 py-3">Rol</th>
+                <th className="px-4 py-3 text-right">Estrellas</th>
+                <th className="px-4 py-3 text-right">Acciones</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
@@ -336,35 +345,37 @@ function AdminPage() {
                       <p className="font-medium">{u.name}</p>
                       <p className="font-mono text-xs text-muted-foreground">{u.email}</p>
                     </td>
-                    <td className="px-4 py-3 text-muted-foreground">{u.yearOfStudy}</td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      {YEAR_OF_STUDY_LABELS[u.yearOfStudy]}
+                    </td>
                     <td className="px-4 py-3 font-mono text-xs">
-                      {u.isAdmin ? "Admin" : "Student"}
+                      {u.isAdmin ? "Admin" : "Estudiante"}
                     </td>
                     <td className="px-4 py-3 text-right font-mono text-star">
                       {getUserTotalStars(u)}
                     </td>
                     <td className="px-4 py-3 text-right">
                       {isSelf ? (
-                        <span className="text-xs text-muted-foreground">Current admin</span>
+                        <span className="text-xs text-muted-foreground">Admin actual</span>
                       ) : (
                         <div className="inline-flex items-center gap-2">
                           <button
                             type="button"
                             onClick={() => {
                               toggleUserAdmin(u.id);
-                              toast.success(`Updated role for ${u.name}.`);
+                              toast.success(`Se actualizó el rol de ${u.name}.`);
                             }}
                             className="rounded-md border border-border px-2.5 py-1 text-xs hover:bg-secondary"
                           >
-                            {u.isAdmin ? "Revoke admin" : "Make admin"}
+                            {u.isAdmin ? "Quitar Admin" : "Hacer Admin"}
                           </button>
                           <button
                             type="button"
                             onClick={() => {
                               removeUser(u.id);
-                              toast.success(`Removed ${u.name}.`);
+                              toast.success(`Se eliminó a ${u.name}.`);
                             }}
-                            aria-label={`Remove ${u.name}`}
+                            aria-label={`Eliminar a ${u.name}`}
                             className="rounded-md border border-destructive/40 p-1.5 text-destructive hover:bg-destructive/10"
                           >
                             <Trash2 className="size-3.5" />

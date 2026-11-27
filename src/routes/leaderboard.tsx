@@ -3,7 +3,7 @@ import { Star, Trophy } from "lucide-react";
 import { useState } from "react";
 import { buildLeaderboard, formatSolveDuration } from "@/lib/advent-logic";
 import { useAdvent } from "@/lib/advent-store";
-import { YEARS_OF_STUDY, type YearOfStudy } from "@/lib/advent-types";
+import { YEAR_OF_STUDY_LABELS, YEARS_OF_STUDY, type YearOfStudy } from "@/lib/advent-types";
 
 export const Route = createFileRoute("/leaderboard")({
   head: () => ({
@@ -12,12 +12,12 @@ export const Route = createFileRoute("/leaderboard")({
       {
         name: "description",
         content:
-          "Rankings of Universidad de Belgrano students by stars earned and solving time.",
+          "Ranking de estudiantes de la Universidad de Belgrano por estrellas ganadas y tiempo de resolución.",
       },
       { property: "og:title", content: "Leaderboard — Code Advent" },
       {
         property: "og:description",
-        content: "See top Python solvers across every year of study at UB.",
+        content: "Mirá los mejores puntajes de Python por año de cursada en la UB.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -37,13 +37,13 @@ function LeaderboardPage() {
         <div>
           <h1 className="text-4xl font-bold tracking-tight">Leaderboard</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Ranked by total stars earned, with faster cumulative solving time breaking ties.
+            Ordenado por total de estrellas ganadas; en caso de empate define el menor tiempo acumulado.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <label htmlFor="year-filter" className="text-xs font-medium text-muted-foreground">
-            Year of study
+            Año de cursada
           </label>
           <select
             id="year-filter"
@@ -51,10 +51,10 @@ function LeaderboardPage() {
             onChange={(e) => setYearFilter(e.target.value as YearOfStudy | "all")}
             className="rounded-lg border border-input bg-card px-3 py-2 text-sm text-foreground focus:outline-2 focus:outline-ring"
           >
-            <option value="all">All Years</option>
+            <option value="all">Todos los años</option>
             {YEARS_OF_STUDY.map((yr) => (
               <option key={yr} value={yr}>
-                {yr}
+                {YEAR_OF_STUDY_LABELS[yr]}
               </option>
             ))}
           </select>
@@ -65,18 +65,19 @@ function LeaderboardPage() {
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border bg-surface text-xs uppercase tracking-wider text-muted-foreground">
             <tr>
-              <th className="px-4 py-3.5">Rank</th>
-              <th className="px-4 py-3.5">Participant</th>
-              <th className="px-4 py-3.5">Year</th>
-              <th className="px-4 py-3.5 text-right">Stars</th>
-              <th className="px-4 py-3.5 text-right">Solving Time</th>
+              <th className="px-4 py-3.5">Puesto</th>
+              <th className="px-4 py-3.5">Participante</th>
+              <th className="px-4 py-3.5">Año</th>
+              <th className="px-4 py-3.5 text-right">Estrellas</th>
+              <th className="px-4 py-3.5 text-right">Tiempo</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border/60">
             {rows.length === 0 ? (
               <tr>
                 <td colSpan={5} className="px-4 py-10 text-center text-muted-foreground">
-                  No participants found for {yearFilter}.
+                  No hay participantes registrados para{" "}
+                  {yearFilter === "all" ? "este filtro" : YEAR_OF_STUDY_LABELS[yearFilter]}.
                 </td>
               </tr>
             ) : (
@@ -97,12 +98,14 @@ function LeaderboardPage() {
                       <p className="font-medium text-foreground">
                         {row.name}
                         {isSelf && (
-                          <span className="ml-2 font-mono text-xs text-star">(You)</span>
+                          <span className="ml-2 font-mono text-xs text-star">(Vos)</span>
                         )}
                       </p>
                       <p className="font-mono text-xs text-muted-foreground">{row.email}</p>
                     </td>
-                    <td className="px-4 py-3.5 text-muted-foreground">{row.yearOfStudy}</td>
+                    <td className="px-4 py-3.5 text-muted-foreground">
+                      {YEAR_OF_STUDY_LABELS[row.yearOfStudy]}
+                    </td>
                     <td className="px-4 py-3.5 text-right font-mono font-semibold text-star">
                       <span className="inline-flex items-center justify-end gap-1">
                         {row.stars}

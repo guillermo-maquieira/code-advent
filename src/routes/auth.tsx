@@ -2,19 +2,19 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { useAdvent } from "@/lib/advent-store";
-import { YEARS_OF_STUDY, type YearOfStudy } from "@/lib/advent-types";
+import { YEAR_OF_STUDY_LABELS, YEARS_OF_STUDY, type YearOfStudy } from "@/lib/advent-types";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign In — Code Advent" },
+      { title: "Iniciar sesión — Code Advent" },
       {
         name: "description",
         content:
-          "Sign in or create an account with your Universidad de Belgrano email to participate in Code Advent.",
+          "Iniciá sesión o creá tu cuenta con tu correo de la Universidad de Belgrano para participar en Code Advent.",
       },
-      { property: "og:title", content: "Sign In — Code Advent" },
-      { property: "og:description", content: "UB email authentication for Code Advent." },
+      { property: "og:title", content: "Iniciar sesión — Code Advent" },
+      { property: "og:description", content: "Acceso con correo UB para Code Advent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -45,10 +45,10 @@ function AuthPage() {
         ? login(email, password)
         : signup({ name, email, password, yearOfStudy });
     if (!result.ok) {
-      setError(result.error ?? "Authentication failed.");
+      setError(result.error ?? "No se pudo iniciar sesión.");
       return;
     }
-    toast.success(mode === "login" ? "Welcome back!" : "Account created! Good luck solving.");
+    toast.success(mode === "login" ? "¡Bienvenido de nuevo!" : "¡Cuenta creada! Éxitos con los desafíos.");
     navigate({ to: "/" });
   }
 
@@ -56,11 +56,11 @@ function AuthPage() {
     <div className="mx-auto max-w-md px-4 py-14 sm:px-6">
       <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
         <h1 className="text-3xl font-bold tracking-tight">
-          {mode === "login" ? "Sign in" : "Create UB account"}
+          {mode === "login" ? "Iniciar sesión" : "Crear cuenta UB"}
         </h1>
         <p className="mt-1.5 text-sm text-muted-foreground">
-          Requires a <span className="font-mono text-star">@ub.edu.ar</span> or{" "}
-          <span className="font-mono text-star">@comunidad.ub.edu.ar</span> address.
+          Requiere un correo <span className="font-mono text-star">@ub.edu.ar</span> o{" "}
+          <span className="font-mono text-star">@comunidad.ub.edu.ar</span>.
         </p>
 
         <div className="mt-6 grid grid-cols-2 rounded-lg border border-border bg-background p-1">
@@ -76,7 +76,7 @@ function AuthPage() {
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Log in
+            Ingresar
           </button>
           <button
             type="button"
@@ -90,7 +90,7 @@ function AuthPage() {
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Sign up
+            Registrarse
           </button>
         </div>
 
@@ -98,7 +98,7 @@ function AuthPage() {
           {mode === "signup" && (
             <div>
               <label htmlFor="auth-name" className="block text-xs font-medium text-muted-foreground">
-                Full name
+                Nombre completo
               </label>
               <input
                 id="auth-name"
@@ -106,7 +106,7 @@ function AuthPage() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Valentina Gómez"
+                placeholder="Ej. Valentina Gómez"
                 className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground focus:outline-2 focus:outline-ring"
               />
             </div>
@@ -114,7 +114,7 @@ function AuthPage() {
 
           <div>
             <label htmlFor="auth-email" className="block text-xs font-medium text-muted-foreground">
-              University email
+              Correo universitario
             </label>
             <input
               id="auth-email"
@@ -122,14 +122,14 @@ function AuthPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="name@comunidad.ub.edu.ar"
+              placeholder="nombre@comunidad.ub.edu.ar"
               className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2 font-mono text-sm text-foreground focus:outline-2 focus:outline-ring"
             />
           </div>
 
           <div>
             <label htmlFor="auth-password" className="block text-xs font-medium text-muted-foreground">
-              Password
+              Contraseña
             </label>
             <input
               id="auth-password"
@@ -145,7 +145,7 @@ function AuthPage() {
           {mode === "signup" && (
             <div>
               <label htmlFor="auth-year" className="block text-xs font-medium text-muted-foreground">
-                Year of study
+                Año de cursada
               </label>
               <select
                 id="auth-year"
@@ -155,7 +155,7 @@ function AuthPage() {
               >
                 {YEARS_OF_STUDY.map((yr) => (
                   <option key={yr} value={yr}>
-                    {yr}
+                    {YEAR_OF_STUDY_LABELS[yr]}
                   </option>
                 ))}
               </select>
@@ -172,12 +172,12 @@ function AuthPage() {
             type="submit"
             className="w-full rounded-lg bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
           >
-            {mode === "login" ? "Sign in" : "Create account"}
+            {mode === "login" ? "Iniciar sesión" : "Crear cuenta"}
           </button>
         </form>
 
         <div className="mt-6 border-t border-border pt-4 text-xs text-muted-foreground">
-          <p className="font-medium text-foreground">Seeded demo accounts (mock auth):</p>
+          <p className="font-medium text-foreground">Cuentas demo precargadas (autenticación local):</p>
           <p className="mt-1 font-mono">
             Admin: guillermo.maquieira@comunidad.ub.edu.ar / ub-admin-2026
           </p>
@@ -185,7 +185,7 @@ function AuthPage() {
             Admin: natalia.cerda@comunidad.ub.edu.ar / ub-admin-2026
           </p>
           <p className="font-mono">
-            Student: sofia.fernandez@comunidad.ub.edu.ar / student123
+            Estudiante: sofia.fernandez@comunidad.ub.edu.ar / student123
           </p>
         </div>
       </div>
